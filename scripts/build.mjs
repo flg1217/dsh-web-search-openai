@@ -103,6 +103,7 @@ const bundled = [
   `    var module = { exports: {} };`,
   `    var exports = module.exports;`,
   indent(inner, 4),
+  `    return module.exports;`,
   `  }`,
   `});`,
   ``,
