@@ -10,8 +10,8 @@
 /** The web-search tool declaration sent in the Responses request. */
 export interface WebSearchTool {
     readonly type: 'web_search';
-    /** Retrieval context size: `low`, `medium`, or `high`. */
-    readonly search_context_size: 'low' | 'medium' | 'high';
+    /** Retrieval context size; free-form string (OpenAI accepts `low`/`medium`/`high`). */
+    readonly search_context_size: string;
 }
 /** Request body sent to the Responses endpoint. */
 export interface OpenAiResponsesRequest {

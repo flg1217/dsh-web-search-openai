@@ -8,7 +8,8 @@ export interface SearchSettingsValue {
   baseURL?: string
   model?: string
   maxTokens?: number
-  searchContextSize?: 'low' | 'medium' | 'high'
+  searchContextSize?: string
+  searchOverride?: boolean
 }
 
 export interface SearchSettingsDraft {
@@ -16,7 +17,8 @@ export interface SearchSettingsDraft {
   apiKey: string
   model: string
   maxTokens: string
-  searchContextSize: 'low' | 'medium' | 'high'
+  searchContextSize: string
+  searchOverride: boolean
 }
 
 export interface SearchSettingsSnapshot {
@@ -34,12 +36,13 @@ export interface SearchSettingsFace {
     searchSettings: SnapshotStore<SearchSettingsSnapshot>
   }
   edit: (field: keyof SearchSettingsDraft, text: string) => void
+  toggleOverride: (next: boolean) => void
   save: () => void
   reload: () => void
   clearKey: () => void
 }
 
-export type SearchSettingsSectionProps = PropsRuntime<'settings.section'> & InjectFace<SearchSettingsFace>
+export type SearchSettingsSectionProps = PropsRuntime<'settings.plugin.item'> & InjectFace<SearchSettingsFace>
 
 export declare function SearchSettingsSection(props: SearchSettingsSectionProps): import('react').ReactNode
 

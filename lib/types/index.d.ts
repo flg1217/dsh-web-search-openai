@@ -28,9 +28,11 @@ export interface Config {
     model?: string;
     /** Upper bound on generated output tokens. Defaults to 2048. */
     maxTokens?: number;
-    /** Retrieval context size sent as `search_context_size`. Defaults to `medium`. */
-    searchContextSize?: 'low' | 'medium' | 'high';
+    /** Retrieval context size sent as `search_context_size` (free-form string). */
+    searchContextSize?: string;
+    /** 是否用 OpenAI 搜索接管全局 web_search 工具(默认关闭);关闭时仅注册独立的 openai_web_search 工具。 */
+    searchOverride?: boolean;
 }
 export declare const Config: z<Config>;
-/** Register the OpenAI search provider with `ctx.web`. */
+/** Register the OpenAI search provider, hot-swappable by the `searchOverride` toggle. */
 export declare function apply(ctx: Context, config: Config): void;

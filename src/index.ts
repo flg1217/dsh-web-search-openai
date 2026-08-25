@@ -22,6 +22,7 @@ import {
   OpenAiSearchProvider,
 } from './provider.js'
 import type { OpenAiSearchProviderOptions } from './provider.js'
+import { registerOpenAiSearchTool } from './search-tool.js'
 
 export {
   OPENAI_DEFAULT_BASE_URL,
@@ -37,7 +38,7 @@ export type { OpenAiSearchProviderOptions } from './provider.js'
 export const name = 'web-search-openai'
 
 /** The web seam this provider registers into. */
-export const inject = ['web']
+export const inject = ['web', 'tools', 'systemPrompt']
 
 /** Settings namespace carrying this provider's endpoint, model, and key reference. */
 export const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE = settingsNamespace('web-search-openai')
@@ -52,8 +53,10 @@ export interface Config {
   model?: string
   /** Upper bound on generated output tokens. Defaults to 2048. */
   maxTokens?: number
-  /** Retrieval context size sent as `search_context_size`. Defaults to `medium`. */
-  searchContextSize?: 'low' | 'medium' | 'high'
+  /** Retrieval context size sent as `search_context_size` (free-form string). */
+  searchContextSize?: string
+  /** 是否用 OpenAI 搜索接管全局 web_search 工具(默认关闭);关闭时仅注册独立的 openai_web_search 工具。 */
+  searchOverride?: boolean
 }
 
 export const Config: z<Config> = z.object({
@@ -61,7 +64,8 @@ export const Config: z<Config> = z.object({
   baseURL: z.string(),
   model: z.string(),
   maxTokens: z.number().step(1).min(1),
-  searchContextSize: z.union(['low', 'medium', 'high'] as const),
+  searchContextSize: z.string(),
+  searchOverride: z.boolean().default(false).description('用 OpenAI 搜索接管全局 web_search 工具'),
 })
 
 /**
@@ -82,16 +86,39 @@ function resolveOptions(ctx: Context, config: Config): OpenAiSearchProviderOptio
   }
 }
 
-/** Register the OpenAI search provider with `ctx.web`. */
+/** Register the OpenAI search provider, hot-swappable by the `searchOverride` toggle. */
 export function apply(ctx: Context, config: Config): void {
   let current: () => Config = () => config
   installSettingsSection(ctx, WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE, Config, config, {
     setSource: (source) => {
       current = source
     },
-    // The provider projects the section per search, so a committed change
-    // needs no re-registration.
+    // Registration form changes (seam vs standalone tool) are synced on
+    // settings/updated below; provider options stay thunked per operation.
     onChange: () => {},
   })
-  ctx.web.registerSearchProvider(new OpenAiSearchProvider(() => resolveOptions(ctx, current())))
+
+  const provider = new OpenAiSearchProvider(() => resolveOptions(ctx, current()))
+  const disposers = new Set<() => void>()
+  const syncSearch = () => {
+    for (const dispose of disposers) {
+      try { dispose() } catch { /* 注销失败不阻断 */ }
+    }
+    disposers.clear()
+    const override = (current().searchOverride ?? false) === true
+    if (override) {
+      if (ctx.web !== undefined) {
+        try {
+          disposers.add(ctx.web.registerSearchProvider(provider))
+        } catch { /* 注册冲突等异常不阻断 */ }
+      }
+    } else {
+      const dispose = registerOpenAiSearchTool(ctx, provider)
+      if (dispose !== undefined) disposers.add(dispose)
+    }
+  }
+  syncSearch()
+  ctx.on('settings/updated', (ns: string) => {
+    if (ns === WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE) syncSearch()
+  })
 }

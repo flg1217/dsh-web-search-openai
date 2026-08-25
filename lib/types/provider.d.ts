@@ -16,7 +16,7 @@ export declare const OPENAI_DEFAULT_BASE_URL = "https://api.openai.com/v1";
 /** Default model name. Deployment-specific; a Codex reverse proxy names its own model. */
 export declare const OPENAI_DEFAULT_MODEL = "gpt-5.6-luna";
 /** Default upper bound on generated output tokens for the Responses request. */
-export declare const OPENAI_DEFAULT_MAX_TOKENS = 2048;
+export declare const OPENAI_DEFAULT_MAX_TOKENS = 128000;
 /** Default `web_search` retrieval context size. */
 export declare const OPENAI_DEFAULT_SEARCH_CONTEXT_SIZE = "medium";
 /** Resolved provider options (the plugin's `apply` supplies env-var and constant defaults). */
@@ -29,8 +29,8 @@ export interface OpenAiSearchProviderOptions {
     model: string;
     /** Upper bound on generated output tokens. */
     maxTokens: number;
-    /** Retrieval context size sent as `search_context_size`. */
-    searchContextSize: 'low' | 'medium' | 'high';
+    /** Retrieval context size sent as `search_context_size` (free-form string). */
+    searchContextSize: string;
 }
 /**
  * Map an OpenAI Responses response to a normalized search result. Structured
