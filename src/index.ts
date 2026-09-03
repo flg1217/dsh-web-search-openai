@@ -13,7 +13,6 @@ import type { Context } from '@deepseek-ai/cordis'
 import { launchEnvironmentOf } from '@deepseek-ai/dsh-launch-environment'
 import z from '@deepseek-ai/schemastery'
 import type {} from '@deepseek-ai/dsh-web'
-import { installSettingsSection, settingsNamespace } from '@deepseek-ai/dsh-settings'
 import {
   OPENAI_DEFAULT_BASE_URL,
   OPENAI_DEFAULT_MAX_TOKENS,
@@ -41,7 +40,7 @@ export const name = 'web-search-openai'
 export const inject = ['web', 'tools', 'systemPrompt']
 
 /** Settings namespace carrying this provider's endpoint, model, and key reference. */
-export const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE = settingsNamespace('web-search-openai')
+export const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE = 'web-search-openai' as never
 
 /** Plugin config (all optional — `apply` fills env-var and constant defaults). */
 export interface Config {
@@ -90,14 +89,22 @@ function resolveOptions(ctx: Context, config: Config): OpenAiSearchProviderOptio
 /** 注册 OpenAI 搜索 provider:仅提供独立的 openai_web_search 工具,不接管全局 web_search。 */
 export function apply(ctx: Context, config: Config): void {
   let current: () => Config = () => config
-  installSettingsSection(ctx, WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE, Config, config, {
-    setSource: (source) => {
-      current = source
-    },
-    // Provider options are thunked per operation; a registration-form change
-    // needs no re-registration.
-    onChange: () => {},
-  })
+  // TODO(专门轮):适配官方 0.1.2 设置注册新协议;旧 API 存在才注册(缺失则降级跳过)。
+  void (async () => {
+    try {
+      const module = await import('@deepseek-ai/dsh-settings') as {
+        installSettingsSection?: (ctx: Context, ns: unknown, schema: unknown, defaults: unknown, hooks: unknown) => void
+      }
+      const register = module.installSettingsSection
+      if (register === undefined) return
+      register(ctx, WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE, Config, config, {
+        setSource: (source: unknown) => {
+          current = source as () => Config
+        },
+        onChange: () => {},
+      })
+    } catch { /* 新版无此 API:跳过注册,功能降级 */ }
+  })()
 
   const provider = new OpenAiSearchProvider(() => resolveOptions(ctx, current()))
   try {

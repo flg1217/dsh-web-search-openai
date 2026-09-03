@@ -17,7 +17,7 @@ export declare const name = "web-search-openai";
 /** The web seam this provider registers into. */
 export declare const inject: string[];
 /** Settings namespace carrying this provider's endpoint, model, and key reference. */
-export declare const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE: import("@deepseek-ai/dsh-settings").SettingsNamespace;
+export declare const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE: never;
 /** Plugin config (all optional — `apply` fills env-var and constant defaults). */
 export interface Config {
     /** OpenAI API key. Falls back to `$OPENAI_API_KEY`. Empty → provider unavailable. */

@@ -46,7 +46,7 @@
     "@deepseek-ai/dsh-tools": "^0.1.0-rc.6"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/cordis": "link:D:/Projects/DeepseekHarness/repo/vendor/cordis",
     "@deepseek-ai/dsh-client-runtime": "^0.1.0-rc.6",
     "@deepseek-ai/dsh-client-ui-primitives": "^0.1.0-rc.6",
     "@deepseek-ai/dsh-client-ui-settings": "^0.1.0-rc.6",
@@ -54,7 +54,8 @@
     "@types/node": "^22.0.0",
     "@types/react": "~18.3.1",
     "esbuild": "^0.25.0",
-    "typescript": "~5.7.2"
+    "typescript": "~5.7.2",
+    "@deepseek-ai/dsh-settings": "link:D:/Projects/DeepseekHarness/repo/packages/settings/settings"
   },
   "files": [
     "lib",
