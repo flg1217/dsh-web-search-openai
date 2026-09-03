@@ -19,6 +19,10 @@ export declare const OPENAI_DEFAULT_MODEL = "gpt-5.6-luna";
 export declare const OPENAI_DEFAULT_MAX_TOKENS = 128000;
 /** Default `web_search` retrieval context size. */
 export declare const OPENAI_DEFAULT_SEARCH_CONTEXT_SIZE = "medium";
+/** 请求超时(ms):OpenAI API 挂起(网络黑洞)时不能无限等待。
+ * 与 CLI 型执行器(AGY/CodeBuddy 的空闲超时)哲学一致:长时间无响应即判定
+ * 卡死并明确报错;正常检索一般 15-90 秒,120s 窗口足够宽松。 */
+export declare const OPENAI_DEFAULT_REQUEST_TIMEOUT_MS = 120000;
 /** Resolved provider options (the plugin's `apply` supplies env-var and constant defaults). */
 export interface OpenAiSearchProviderOptions {
     /** OpenAI API key. Empty/absent makes the provider unavailable. */
@@ -31,6 +35,8 @@ export interface OpenAiSearchProviderOptions {
     maxTokens: number;
     /** Retrieval context size sent as `search_context_size` (free-form string). */
     searchContextSize: string;
+    /** 请求超时预算(ms)。默认 120s;`<= 0` 表示不设(沿用上游 signal)。 */
+    requestTimeoutMs?: number;
 }
 /**
  * Map an OpenAI Responses response to a normalized search result. Structured

@@ -30,6 +30,8 @@ export interface Config {
     maxTokens?: number;
     /** Retrieval context size sent as `search_context_size` (free-form string). */
     searchContextSize?: string;
+    /** 请求超时预算(ms),默认 120s。 */
+    requestTimeoutMs?: number;
     /** 是否用 OpenAI 搜索接管全局 web_search 工具(默认关闭);关闭时仅注册独立的 openai_web_search 工具。 */
     searchOverride?: boolean;
 }

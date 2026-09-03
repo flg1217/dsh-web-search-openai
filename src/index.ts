@@ -55,6 +55,8 @@ export interface Config {
   maxTokens?: number
   /** Retrieval context size sent as `search_context_size` (free-form string). */
   searchContextSize?: string
+  /** 请求超时预算(ms),默认 120s。 */
+  requestTimeoutMs?: number
   /** 是否用 OpenAI 搜索接管全局 web_search 工具(默认关闭);关闭时仅注册独立的 openai_web_search 工具。 */
   searchOverride?: boolean
 }
@@ -65,6 +67,7 @@ export const Config: z<Config> = z.object({
   model: z.string(),
   maxTokens: z.number().step(1).min(1),
   searchContextSize: z.string(),
+  requestTimeoutMs: z.number().step(1).min(0),
   searchOverride: z.boolean().default(false).description('用 OpenAI 搜索接管全局 web_search 工具'),
 })
 
@@ -83,6 +86,7 @@ function resolveOptions(ctx: Context, config: Config): OpenAiSearchProviderOptio
     model: config.model ?? OPENAI_DEFAULT_MODEL,
     maxTokens: config.maxTokens ?? OPENAI_DEFAULT_MAX_TOKENS,
     searchContextSize: config.searchContextSize ?? OPENAI_DEFAULT_SEARCH_CONTEXT_SIZE,
+    requestTimeoutMs: config.requestTimeoutMs,
   }
 }
 

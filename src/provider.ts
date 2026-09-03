@@ -40,6 +40,11 @@ export const OPENAI_DEFAULT_MAX_TOKENS = 128000
 /** Default `web_search` retrieval context size. */
 export const OPENAI_DEFAULT_SEARCH_CONTEXT_SIZE = 'medium'
 
+/** 请求超时(ms):OpenAI API 挂起(网络黑洞)时不能无限等待。
+ * 与 CLI 型执行器(AGY/CodeBuddy 的空闲超时)哲学一致:长时间无响应即判定
+ * 卡死并明确报错;正常检索一般 15-90 秒,120s 窗口足够宽松。 */
+export const OPENAI_DEFAULT_REQUEST_TIMEOUT_MS = 120_000
+
 /** Attribution header sent on every request. Bump with the package version. */
 const USER_AGENT = 'deepseek-harness/0.0.1'
 
@@ -55,6 +60,8 @@ export interface OpenAiSearchProviderOptions {
   maxTokens: number
   /** Retrieval context size sent as `search_context_size` (free-form string). */
   searchContextSize: string
+  /** 请求超时预算(ms)。默认 120s;`<= 0` 表示不设(沿用上游 signal)。 */
+  requestTimeoutMs?: number
 }
 
 /**
@@ -210,6 +217,11 @@ export class OpenAiSearchProvider implements WebSearchProvider {
       tools: [tool],
       max_output_tokens: options.maxTokens,
     }
+    // 请求超时:与调用方取消信号合并,任一触发即中止(避免 API 挂起时无限等)。
+    const requestTimeoutMs = options.requestTimeoutMs ?? OPENAI_DEFAULT_REQUEST_TIMEOUT_MS
+    const effectiveSignal = requestTimeoutMs > 0
+      ? (signal !== undefined ? AbortSignal.any([signal, AbortSignal.timeout(requestTimeoutMs)]) : AbortSignal.timeout(requestTimeoutMs))
+      : signal
     let response: Response
     try {
       response = await fetch(endpoint, {
@@ -222,10 +234,13 @@ export class OpenAiSearchProvider implements WebSearchProvider {
           'user-agent': USER_AGENT,
         },
         body: JSON.stringify(body),
-        ...signal !== undefined ? { signal } : {},
+        ...effectiveSignal !== undefined ? { signal: effectiveSignal } : {},
       })
     } catch (error: unknown) {
       if (isAbortError(error)) throw new WebError('OpenAI search aborted', 'WEB_ABORTED', { cause: error })
+      if (isTimeoutError(error)) {
+        throw new WebError(`OpenAI search timed out after ${Math.round(requestTimeoutMs / 1000)}s`, 'WEB_TIMEOUT', { cause: error })
+      }
       throw new WebError(`OpenAI search request failed: ${String(error)}`, 'WEB_PROVIDER_ERROR', { cause: error })
     }
 
@@ -262,6 +277,15 @@ export class OpenAiSearchProvider implements WebSearchProvider {
 /** True for a fetch/`AbortSignal` abort, surfaced as `WEB_ABORTED`. */
 function isAbortError(error: unknown): boolean {
   return error instanceof DOMException && error.name === 'AbortError'
+}
+
+/** True for the request-timeout abort (`AbortSignal.timeout`), surfaced as `WEB_TIMEOUT`. */
+function isTimeoutError(error: unknown): boolean {
+  if (error instanceof DOMException && error.name === 'TimeoutError') return true
+  if (error instanceof Error) {
+    return error.name === 'TimeoutError' || error.message.includes('aborted due to timeout')
+  }
+  return false
 }
 
 /** True for OpenAI request limits that can be sent to the Responses API. */
