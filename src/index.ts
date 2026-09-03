@@ -57,8 +57,6 @@ export interface Config {
   searchContextSize?: string
   /** 请求超时预算(ms),默认 120s。 */
   requestTimeoutMs?: number
-  /** 是否用 OpenAI 搜索接管全局 web_search 工具(默认关闭);关闭时仅注册独立的 openai_web_search 工具。 */
-  searchOverride?: boolean
 }
 
 export const Config: z<Config> = z.object({
@@ -68,7 +66,6 @@ export const Config: z<Config> = z.object({
   maxTokens: z.number().step(1).min(1),
   searchContextSize: z.string(),
   requestTimeoutMs: z.number().step(1).min(0),
-  searchOverride: z.boolean().default(false).description('用 OpenAI 搜索接管全局 web_search 工具'),
 })
 
 /**
@@ -90,39 +87,20 @@ function resolveOptions(ctx: Context, config: Config): OpenAiSearchProviderOptio
   }
 }
 
-/** Register the OpenAI search provider, hot-swappable by the `searchOverride` toggle. */
+/** 注册 OpenAI 搜索 provider:仅提供独立的 openai_web_search 工具,不接管全局 web_search。 */
 export function apply(ctx: Context, config: Config): void {
   let current: () => Config = () => config
   installSettingsSection(ctx, WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE, Config, config, {
     setSource: (source) => {
       current = source
     },
-    // Registration form changes (seam vs standalone tool) are synced on
-    // settings/updated below; provider options stay thunked per operation.
+    // Provider options are thunked per operation; a registration-form change
+    // needs no re-registration.
     onChange: () => {},
   })
 
   const provider = new OpenAiSearchProvider(() => resolveOptions(ctx, current()))
-  const disposers = new Set<() => void>()
-  const syncSearch = () => {
-    for (const dispose of disposers) {
-      try { dispose() } catch { /* 注销失败不阻断 */ }
-    }
-    disposers.clear()
-    const override = (current().searchOverride ?? false) === true
-    if (override) {
-      if (ctx.web !== undefined) {
-        try {
-          disposers.add(ctx.web.registerSearchProvider(provider))
-        } catch { /* 注册冲突等异常不阻断 */ }
-      }
-    } else {
-      const dispose = registerOpenAiSearchTool(ctx, provider)
-      if (dispose !== undefined) disposers.add(dispose)
-    }
-  }
-  syncSearch()
-  ctx.on('settings/updated', (ns: string) => {
-    if (ns === WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE) syncSearch()
-  })
+  try {
+    registerOpenAiSearchTool(ctx, provider)
+  } catch { /* 已存在同名工具等异常不阻断 */ }
 }

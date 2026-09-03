@@ -27,8 +27,6 @@ export interface SearchSettingsValue {
   maxTokens?: number
   /** search_context_size:检索时喂给模型的网页上下文量,自由字符串。 */
   searchContextSize?: string
-  /** 是否接管全局 web_search 工具(开)或仅提供独立 openai_web_search 工具(关)。 */
-  searchOverride?: boolean
 }
 
 /** One editable field value, staged as text so the form controls stay uncontrolled-input friendly. */
@@ -38,7 +36,6 @@ export interface SearchSettingsDraft {
   model: string
   maxTokens: string
   searchContextSize: string
-  searchOverride: boolean
 }
 
 /** What the card renders. */
@@ -67,8 +64,6 @@ export interface SearchSettingsFace {
   }
   /** Stage one field edit into the draft. */
   edit: (field: keyof SearchSettingsDraft, text: string) => void
-  /** Toggle the searchOverride checkbox in the draft. */
-  toggleOverride: (next: boolean) => void
   /** Write every staged field, then re-seed from what the Host accepted. */
   save: () => void
   /** Discard the draft and re-read the authoritative section. */
@@ -122,7 +117,7 @@ const C = {
 }
 
 /** Render the OpenAI search provider settings card (plugins tab). */
-export function SearchSettingsSection({ useSearchSettings, edit, toggleOverride, save, reload, clearKey }: SearchSettingsSectionProps) {
+export function SearchSettingsSection({ useSearchSettings, edit, save, reload, clearKey }: SearchSettingsSectionProps) {
   const state = useSearchSettings(value => value)
   const [open, setOpen] = useState(false)
   const disabled = !state.writable || state.saving
@@ -167,19 +162,6 @@ export function SearchSettingsSection({ useSearchSettings, edit, toggleOverride,
           {field('search_context_size',
             <Input className={C.input} value={state.draft.searchContextSize} disabled={disabled} onChange={(event) => { edit('searchContextSize', event.target.value) }} />,
             '检索时喂给模型的网页上下文量(官方值 low/medium/high,可自定义)')}
-          <div className={C.field}>
-            <div className={C.fieldHead}>
-              <span className={C.label}>接管全局 web_search</span>
-              <input type="checkbox" checked={state.draft.searchOverride} disabled={disabled}
-                onChange={(event) => { toggleOverride(event.target.checked) }}
-                style={{ accentColor: 'var(--dsw-alias-brand-primary)', width: 16, height: 16, cursor: 'pointer' }} />
-            </div>
-            <p className={C.hint}>
-              {state.draft.searchOverride
-                ? '开启:全局 web_search 工具由 OpenAI 搜索提供(需与部署配置 web.searchProvider 一致,并关闭其它插件的搜索接管)'
-                : '关闭:不占全局搜索,仅提供独立的 openai_web_search 工具'}
-            </p>
-          </div>
           <div className={C.row}>
             <Button variant="outline" disabled={disabled || !state.dirty} onClick={save}>{state.saving ? '保存中…' : '保存并应用'}</Button>
             <Button variant="outline" disabled={disabled} onClick={reload}>重新加载</Button>
@@ -199,7 +181,6 @@ function draftOf(value: SearchSettingsValue | undefined): SearchSettingsDraft {
     model: value?.model ?? 'gpt-5.6-luna',
     maxTokens: String(value?.maxTokens ?? 128000),
     searchContextSize: value?.searchContextSize ?? 'medium',
-    searchOverride: value?.searchOverride ?? false,
   }
 }
 
@@ -209,7 +190,6 @@ function dirtyOf(draft: SearchSettingsDraft, value: SearchSettingsValue | undefi
     || draft.model.trim() !== (value?.model ?? 'gpt-5.6-luna')
     || draft.maxTokens.trim() !== String(value?.maxTokens ?? 128000)
     || draft.searchContextSize !== (value?.searchContextSize ?? 'medium')
-    || draft.searchOverride !== (value?.searchOverride ?? false)
     || draft.apiKey.trim().length > 0
 }
 
@@ -239,10 +219,6 @@ export class SearchSettingsController {
       hooks: { searchSettings: this.store },
       edit: (field, text) => {
         this.draft = { ...this.draft, [field]: text }
-        this.publish()
-      },
-      toggleOverride: (next) => {
-        this.draft = { ...this.draft, searchOverride: next }
         this.publish()
       },
       save: () => { void this.save() },
@@ -290,9 +266,6 @@ export class SearchSettingsController {
       }
       if (this.draft.searchContextSize !== (value?.searchContextSize ?? 'medium')) {
         writes.push(this.scope.set('searchContextSize', this.draft.searchContextSize))
-      }
-      if (this.draft.searchOverride !== (value?.searchOverride ?? false)) {
-        writes.push(this.draft.searchOverride ? this.scope.set('searchOverride', true) : this.scope.unset('searchOverride'))
       }
       await Promise.all(writes)
       this.savedAt = Date.now()

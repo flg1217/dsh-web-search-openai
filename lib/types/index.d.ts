@@ -32,9 +32,7 @@ export interface Config {
     searchContextSize?: string;
     /** 请求超时预算(ms),默认 120s。 */
     requestTimeoutMs?: number;
-    /** 是否用 OpenAI 搜索接管全局 web_search 工具(默认关闭);关闭时仅注册独立的 openai_web_search 工具。 */
-    searchOverride?: boolean;
 }
 export declare const Config: z<Config>;
-/** Register the OpenAI search provider, hot-swappable by the `searchOverride` toggle. */
+/** 注册 OpenAI 搜索 provider:仅提供独立的 openai_web_search 工具,不接管全局 web_search。 */
 export declare function apply(ctx: Context, config: Config): void;
