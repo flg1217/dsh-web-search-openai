@@ -40,7 +40,7 @@ export const name = 'web-search-openai'
 export const inject = ['web', 'tools', 'systemPrompt']
 
 /** Settings namespace carrying this provider's endpoint, model, and key reference. */
-export const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE = 'web-search-openai' as never
+export const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE = 'web-search-openai'
 
 /** Plugin config (all optional — `apply` fills env-var and constant defaults). */
 export interface Config {
@@ -89,22 +89,24 @@ function resolveOptions(ctx: Context, config: Config): OpenAiSearchProviderOptio
 /** 注册 OpenAI 搜索 provider:仅提供独立的 openai_web_search 工具,不接管全局 web_search。 */
 export function apply(ctx: Context, config: Config): void {
   let current: () => Config = () => config
-  // TODO(专门轮):适配官方 0.1.2 设置注册新协议;旧 API 存在才注册(缺失则降级跳过)。
-  void (async () => {
-    try {
-      const module = await import('@deepseek-ai/dsh-settings') as {
-        installSettingsSection?: (ctx: Context, ns: unknown, schema: unknown, defaults: unknown, hooks: unknown) => void
-      }
-      const register = module.installSettingsSection
-      if (register === undefined) return
-      register(ctx, WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE, Config, config, {
-        setSource: (source: unknown) => {
-          current = source as () => Config
-        },
-        onChange: () => {},
-      })
-    } catch { /* 新版无此 API:跳过注册,功能降级 */ }
-  })()
+  // 官方 0.1.2:设置区经 ctx.settings.installSection 注册。
+  ctx.inject(['settings'], (settingsCtx) => {
+    const settings = settingsCtx.get('settings') as {
+      installSection?: (
+        owner: Context,
+        ns: string,
+        schema: unknown,
+        entry: unknown,
+        hooks: { setSource?: (source: () => Config | undefined) => void; onChange?: () => void },
+      ) => void
+    } | undefined
+    settings?.installSection?.(ctx, WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE, Config, config, {
+      setSource: (source) => {
+        current = (() => source() ?? config) as () => Config
+      },
+      onChange: () => {},
+    })
+  })
 
   const provider = new OpenAiSearchProvider(() => resolveOptions(ctx, current()))
   try {
