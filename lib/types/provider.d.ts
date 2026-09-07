@@ -42,11 +42,11 @@ export interface OpenAiSearchProviderOptions {
  * Map an OpenAI Responses response to a normalized search result. Structured
  * `web_search_call.search_results[]` entries become sources first (deduped by
  * URL); the message `url_citation` annotations — on the item or inside its text
- * blocks — then contribute the URLs some gateways expose only there. When no
- * call item exists and no citation appeared, the search tool never ran and the
- * result is an error rather than a prose-scraping fallback. The web service
- * owns the final `maxResults` truncation, so `truncated` is always `false`
- * here.
+ * blocks — then contribute the URLs some gateways expose only there. A response
+ * with no search call and no citations still yields its generated answer as
+ * `content` with empty `sources`; only a completely empty output is treated as
+ * "the search tool never ran" and errors. The web service owns the final
+ * `maxResults` truncation, so `truncated` is always `false` here.
  *
  * @param response - the parsed Responses response body.
  * @returns the normalized result with the generated answer as `content`.
