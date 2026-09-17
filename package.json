@@ -46,16 +46,16 @@
     "@deepseek-ai/dsh-tools": "^0.1.0-rc.6"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "link:D:/Projects/DeepseekHarness/repo/vendor/cordis",
-    "@deepseek-ai/dsh-client-ui-primitives": "link:D:/Projects/DeepseekHarness/repo/packages/client/ui-primitives",
-    "@deepseek-ai/dsh-client-ui-settings": "link:D:/Projects/DeepseekHarness/repo/packages/client/ui-settings",
-    "@deepseek-ai/dsh-client-ui-slots": "link:D:/Projects/DeepseekHarness/repo/packages/client/ui-slots",
+    "@deepseek-ai/cordis": "link:h:/Projects/DeepseekHarness/deepseek-harness/vendor/cordis",
+    "@deepseek-ai/dsh-client-ui-primitives": "link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/ui-primitives",
+    "@deepseek-ai/dsh-client-ui-settings": "link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/ui-settings",
+    "@deepseek-ai/dsh-client-ui-slots": "link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/ui-slots",
     "@types/node": "^22.0.0",
     "@types/react": "~18.3.1",
     "esbuild": "^0.25.0",
     "typescript": "~5.7.2",
-    "@deepseek-ai/dsh-settings": "link:D:/Projects/DeepseekHarness/repo/packages/settings/settings",
-    "@deepseek-ai/dsh-client-store": "link:D:/Projects/DeepseekHarness/repo/packages/client/store"
+    "@deepseek-ai/dsh-settings": "link:h:/Projects/DeepseekHarness/deepseek-harness/packages/settings/settings",
+    "@deepseek-ai/dsh-client-store": "link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/store"
   },
   "files": [
     "lib",

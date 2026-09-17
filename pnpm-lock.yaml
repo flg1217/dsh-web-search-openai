@@ -10,16 +10,16 @@ importers:
     dependencies:
       '@deepseek-ai/dsh-launch-environment':
         specifier: ^0.1.0-rc.6
-        version: 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
+        version: 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
       '@deepseek-ai/dsh-settings':
         specifier: ^0.1.0-rc.6
-        version: 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/schemastery@3.18.1)
+        version: 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/schemastery@3.18.1)
       '@deepseek-ai/dsh-tools':
         specifier: ^0.1.0-rc.6
-        version: 0.1.0-rc.6(940100db7f3dd99ce443dc13849bbb0e)
+        version: 0.1.0-rc.6(0326b66b54c0e81312c473bd0c0f0fe7)
       '@deepseek-ai/dsh-web':
         specifier: ^0.1.0-rc.6
-        version: 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-llm@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))))
+        version: 0.1.0-rc.6(827ca5ac0d32767eab0fa245c791f4c8)
       '@deepseek-ai/schemastery':
         specifier: ^3.0.0
         version: 3.18.1
@@ -28,20 +28,20 @@ importers:
         version: 18.3.1
     devDependencies:
       '@deepseek-ai/cordis':
-        specifier: link:D:/Projects/DeepseekHarness/repo/vendor/cordis
-        version: link:../../repo/vendor/cordis
+        specifier: link:h:/Projects/DeepseekHarness/deepseek-harness/vendor/cordis
+        version: link:../deepseek-harness/vendor/cordis
       '@deepseek-ai/dsh-client-store':
-        specifier: link:D:/Projects/DeepseekHarness/repo/packages/client/store
-        version: link:../../repo/packages/client/store
+        specifier: link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/store
+        version: link:../deepseek-harness/packages/client/store
       '@deepseek-ai/dsh-client-ui-primitives':
-        specifier: link:D:/Projects/DeepseekHarness/repo/packages/client/ui-primitives
-        version: link:../../repo/packages/client/ui-primitives
+        specifier: link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/ui-primitives
+        version: link:../deepseek-harness/packages/client/ui-primitives
       '@deepseek-ai/dsh-client-ui-settings':
-        specifier: link:D:/Projects/DeepseekHarness/repo/packages/client/ui-settings
-        version: link:../../repo/packages/client/ui-settings
+        specifier: link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/ui-settings
+        version: link:../deepseek-harness/packages/client/ui-settings
       '@deepseek-ai/dsh-client-ui-slots':
-        specifier: link:D:/Projects/DeepseekHarness/repo/packages/client/ui-slots
-        version: link:../../repo/packages/client/ui-slots
+        specifier: link:h:/Projects/DeepseekHarness/deepseek-harness/packages/client/ui-slots
+        version: link:../deepseek-harness/packages/client/ui-slots
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.1
@@ -388,120 +388,120 @@ snapshots:
 
   '@deepseek-ai/cosmokit@1.8.2': {}
 
-  '@deepseek-ai/dsh-agent@0.1.0-rc.6(84b181ef3024508aaa9f2445cf89a47b)':
+  '@deepseek-ai/dsh-agent@0.1.0-rc.6(488f65b497a1bf0186aed6397f74269b)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
-      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))
-      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-session': 0.1.0-rc.6(c5299fe32af1161084e5219f2b208d06)
-      '@deepseek-ai/dsh-system-prompt': 0.1.0-rc.6(20e37b8d7c0ff417697b5e33a20fc28b)
-      '@deepseek-ai/dsh-typert-protocol': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
+      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))
+      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-session': 0.1.0-rc.6(ee4ac1796276a3ccbf75b6751fbbcd08)
+      '@deepseek-ai/dsh-system-prompt': 0.1.0-rc.6(01009bdc333f7a6090af42e98d26efa8)
+      '@deepseek-ai/dsh-typert-protocol': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
 
-  '@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))':
+  '@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
 
-  '@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))':
+  '@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
 
-  '@deepseek-ai/dsh-code-runtime@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))':
+  '@deepseek-ai/dsh-code-runtime@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
 
-  '@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)':
+  '@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
       '@deepseek-ai/schemastery': 3.18.1
 
-  '@deepseek-ai/dsh-launch-environment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))':
+  '@deepseek-ai/dsh-launch-environment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
 
-  '@deepseek-ai/dsh-llm@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))':
+  '@deepseek-ai/dsh-llm@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-attachment': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
-      '@deepseek-ai/dsh-timeout': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-attachment': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
+      '@deepseek-ai/dsh-timeout': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
       '@deepseek-ai/schemastery': 3.18.1
 
-  '@deepseek-ai/dsh-scope@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))':
+  '@deepseek-ai/dsh-scope@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
 
-  '@deepseek-ai/dsh-session@0.1.0-rc.6(c5299fe32af1161084e5219f2b208d06)':
+  '@deepseek-ai/dsh-session@0.1.0-rc.6(ee4ac1796276a3ccbf75b6751fbbcd08)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
-      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))
-      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-typert-protocol': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
+      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))
+      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-typert-protocol': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
 
-  '@deepseek-ai/dsh-settings@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/schemastery@3.18.1)':
+  '@deepseek-ai/dsh-settings@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/schemastery@3.18.1)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
       '@deepseek-ai/schemastery': 3.18.1
 
-  '@deepseek-ai/dsh-system-prompt@0.1.0-rc.6(20e37b8d7c0ff417697b5e33a20fc28b)':
+  '@deepseek-ai/dsh-system-prompt@0.1.0-rc.6(01009bdc333f7a6090af42e98d26efa8)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
-      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))
-      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
+      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))
+      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
       '@deepseek-ai/schemastery': 3.18.1
 
-  '@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))':
+  '@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
 
-  '@deepseek-ai/dsh-tools@0.1.0-rc.6(940100db7f3dd99ce443dc13849bbb0e)':
+  '@deepseek-ai/dsh-tools@0.1.0-rc.6(0326b66b54c0e81312c473bd0c0f0fe7)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-agent': 0.1.0-rc.6(84b181ef3024508aaa9f2445cf89a47b)
-      '@deepseek-ai/dsh-code-runtime': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
-      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))
-      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-session': 0.1.0-rc.6(c5299fe32af1161084e5219f2b208d06)
-      '@deepseek-ai/dsh-system-prompt': 0.1.0-rc.6(20e37b8d7c0ff417697b5e33a20fc28b)
-      '@deepseek-ai/dsh-user-approval': 0.1.0-rc.6(69376d746ec9cb9b1aac0c3cdd901e4a)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-agent': 0.1.0-rc.6(488f65b497a1bf0186aed6397f74269b)
+      '@deepseek-ai/dsh-code-runtime': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
+      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))
+      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-session': 0.1.0-rc.6(ee4ac1796276a3ccbf75b6751fbbcd08)
+      '@deepseek-ai/dsh-system-prompt': 0.1.0-rc.6(01009bdc333f7a6090af42e98d26efa8)
+      '@deepseek-ai/dsh-user-approval': 0.1.0-rc.6(a24d6c89905946c10fd96de6f55746f5)
       '@deepseek-ai/schemastery': 3.18.1
 
-  '@deepseek-ai/dsh-typert-protocol@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))':
+  '@deepseek-ai/dsh-typert-protocol@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
 
-  '@deepseek-ai/dsh-user-approval@0.1.0-rc.6(69376d746ec9cb9b1aac0c3cdd901e4a)':
+  '@deepseek-ai/dsh-user-approval@0.1.0-rc.6(a24d6c89905946c10fd96de6f55746f5)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-agent': 0.1.0-rc.6(84b181ef3024508aaa9f2445cf89a47b)
-      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
-      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))
-      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))
-      '@deepseek-ai/dsh-session': 0.1.0-rc.6(c5299fe32af1161084e5219f2b208d06)
-      '@deepseek-ai/dsh-system-prompt': 0.1.0-rc.6(20e37b8d7c0ff417697b5e33a20fc28b)
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-agent': 0.1.0-rc.6(488f65b497a1bf0186aed6397f74269b)
+      '@deepseek-ai/dsh-brand': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
+      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))
+      '@deepseek-ai/dsh-scope': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))
+      '@deepseek-ai/dsh-session': 0.1.0-rc.6(ee4ac1796276a3ccbf75b6751fbbcd08)
+      '@deepseek-ai/dsh-system-prompt': 0.1.0-rc.6(01009bdc333f7a6090af42e98d26efa8)
       '@deepseek-ai/schemastery': 3.18.1
 
-  '@deepseek-ai/dsh-web@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-llm@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))))':
+  '@deepseek-ai/dsh-web@0.1.0-rc.6(827ca5ac0d32767eab0fa245c791f4c8)':
     dependencies:
-      '@deepseek-ai/cordis': link:../../repo/vendor/cordis
-      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)
-      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@..+repo+vendor+cordis)))
+      '@deepseek-ai/cordis': link:../deepseek-harness/vendor/cordis
+      '@deepseek-ai/dsh-invariants': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)
+      '@deepseek-ai/dsh-llm': 0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-attachment@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-brand@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis))(@deepseek-ai/dsh-timeout@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)(@deepseek-ai/dsh-invariants@0.1.0-rc.6(@deepseek-ai/cordis@deepseek-harness+vendor+cordis)))
       '@deepseek-ai/schemastery': 3.18.1
 
   '@deepseek-ai/schemastery@3.18.1':
