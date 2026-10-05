@@ -1,17 +1,17 @@
 /**
  * OpenAI 搜索设置卡片(browser half of `@deepseek-ai/dsh-web-search-openai`):
  * a schema-free form over the `web-search-openai` settings namespace, bound to
- * the plugins tab's `settings.plugin.item` slot (same hierarchy as the
+ * the plugins tab's `settings.plugins.tab` slot (same hierarchy as the
  * AntiGravity / CodeBuddy cards). The API key field is write-only — the Host
  * redacts secrets from every describe response, so the card only ever writes a
  * new value and never renders the stored one.
  * @module @deepseek-ai/dsh-web-search-openai/client
  */
 
-import { Button, IconChevronDownOutline14, Input } from '@deepseek-ai/dsh-client-ui-primitives'
+import { Button, IconChevronDownOutlineMedium, Input } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { SettingsScope } from '@deepseek-ai/dsh-client-ui-settings/client'
+import type { ConfigForm } from '@deepseek-ai/dsh-client-ui-settings/client'
 import type { SnapshotStore } from '@deepseek-ai/dsh-client-store'
 import type { InjectFace, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
 import type { ReactNode } from 'react'
@@ -75,7 +75,7 @@ export interface SearchSettingsFace {
 
 /** Props the renderer binds for the card. */
 export type SearchSettingsSectionProps =
-  PropsRuntime<'settings.plugin.item'>
+  PropsRuntime<'settings.plugins.tab'>
   & InjectFace<SearchSettingsFace>
 
 /** 卡片 CSS(与 AntiGravity/CodeBuddy 卡片完全同款)。 */
@@ -140,7 +140,7 @@ export function SearchSettingsSection({ useSearchSettings, edit, save, reload, c
           <span className={C.name}>OpenAI 搜索</span>
           <span className={C.description}>OpenAI Responses API 搜索提供方(web_search 工具)</span>
         </span>
-        <IconChevronDownOutline14 className={`${C.chevron} ${open ? C.chevronOpen : ''}`} />
+        <IconChevronDownOutlineMedium className={`${C.chevron} ${open ? C.chevronOpen : ''}`} />
       </button>
       {open && (
         <div className={C.body}>
@@ -205,7 +205,7 @@ export class SearchSettingsController {
   /**
    * @param scope - the bound settings scope for the `web-search-openai` namespace.
    */
-  constructor(private readonly scope: SettingsScope<SearchSettingsValue>) {
+  constructor(private readonly scope: ConfigForm<SearchSettingsValue>) {
     this.draft = draftOf(this.scope.getSnapshot().value)
     this.store = createSnapshotStore(this.project())
     this.scope.subscribe(() => {
@@ -317,20 +317,18 @@ export class SearchSettingsController {
 export const name = 'web-search-openai-client'
 
 /** Services required by the browser half. */
-export const inject = ['slots', 'settingsScope']
+export const inject = ['slots', 'configForms']
 
 /**
- * Mount the OpenAI search card into the plugins tab (`settings.plugin.item`,
- * keyed by the namespace — same hierarchy as the AntiGravity/CodeBuddy cards).
+ * Mount the OpenAI search card into the plugins tab (`settings.plugins.tab`).
  * @param ctx - the browser plugin context.
  */
 export function apply(ctx: ClientContext): void {
-  const controller = new SearchSettingsController(ctx.settingsScope.bind({ namespace: WEB_SEARCH_OPENAI_NS }))
-  ctx.slots.inject('settings.plugin.item', () => ctx.slots.register({
-    name: 'settings.plugin.item',
-    // id(rc.6 list 槽)与 key(rc.7 keyed 槽)都传,兼容两种槽类型。
+  // 0.2.1:settingsScope 已移除;配置表单经 configForms 按 profile 条目 id 取用。
+  const controller = new SearchSettingsController(ctx.configForms.get(WEB_SEARCH_OPENAI_NS))
+  ctx.slots.inject('settings.plugins.tab', () => ctx.slots.register({
+    name: 'settings.plugins.tab',
     id: WEB_SEARCH_OPENAI_NS,
-    key: WEB_SEARCH_OPENAI_NS,
     order: 40,
     label: () => 'OpenAI 搜索',
     inject: () => controller.inject(),

@@ -9,9 +9,10 @@
  * @module @dsh-external/dsh-web-search-openai
  */
 
-import type { Context } from '@deepseek-ai/cordis'
+import type { Context, Volatile } from '@deepseek-ai/cordis'
 import { launchEnvironmentOf } from '@deepseek-ai/dsh-launch-environment'
 import z from '@deepseek-ai/schemastery'
+import type {} from '@deepseek-ai/dsh-settings'
 import type {} from '@deepseek-ai/dsh-web'
 import {
   OPENAI_DEFAULT_BASE_URL,
@@ -42,29 +43,33 @@ export const inject = ['web', 'tools', 'systemPrompt']
 /** Settings namespace carrying this provider's endpoint, model, and key reference. */
 export const WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE = 'web-search-openai'
 
-/** Plugin config (all optional — `apply` fills env-var and constant defaults). */
+/**
+ * Plugin config (profile entry id `web-search-openai`; the schema is the
+ * settings form — volatile fields are live references read through `.get()`).
+ * All optional — `apply` fills env-var and constant defaults at resolve time.
+ */
 export interface Config {
   /** OpenAI API key. Falls back to `$OPENAI_API_KEY`. Empty → provider unavailable. */
-  apiKey?: string
+  apiKey: Volatile<string | undefined>
   /** Endpoint base; `/responses` is appended. Defaults to the public API. */
-  baseURL?: string
+  baseURL: Volatile<string | undefined>
   /** Responses API model name. Defaults to `gpt-5.6-luna`. */
-  model?: string
+  model: Volatile<string | undefined>
   /** Upper bound on generated output tokens. Defaults to 2048. */
-  maxTokens?: number
+  maxTokens: Volatile<number | undefined>
   /** Retrieval context size sent as `search_context_size` (free-form string). */
-  searchContextSize?: string
+  searchContextSize: Volatile<string | undefined>
   /** 请求超时预算(ms),默认 120s。 */
-  requestTimeoutMs?: number
+  requestTimeoutMs: Volatile<number | undefined>
 }
 
-export const Config: z<Config> = z.object({
-  apiKey: z.string().role('secret'),
-  baseURL: z.string(),
-  model: z.string(),
-  maxTokens: z.number().step(1).min(1),
-  searchContextSize: z.string(),
-  requestTimeoutMs: z.number().step(1).min(0),
+export const Config = z.object({
+  apiKey: z.string().role('secret').volatile(),
+  baseURL: z.string().volatile(),
+  model: z.string().volatile(),
+  maxTokens: z.number().step(1).min(1).volatile(),
+  searchContextSize: z.string().volatile(),
+  requestTimeoutMs: z.number().step(1).min(0).volatile(),
 })
 
 /**
@@ -72,43 +77,29 @@ export const Config: z<Config> = z.object({
  * search with. Environment fallbacks stay here rather than in the provider:
  * every value it reads is already fully defaulted.
  * @param ctx - plugin context supplying the environment plane.
- * @param config - the currently authoritative section.
+ * @param config - the currently authoritative section (live references).
  * @returns options for one search.
  */
 function resolveOptions(ctx: Context, config: Config): OpenAiSearchProviderOptions {
   return {
-    apiKey: config.apiKey ?? launchEnvironmentOf(ctx).get('OPENAI_API_KEY')?.value ?? '',
-    baseURL: config.baseURL ?? OPENAI_DEFAULT_BASE_URL,
-    model: config.model ?? OPENAI_DEFAULT_MODEL,
-    maxTokens: config.maxTokens ?? OPENAI_DEFAULT_MAX_TOKENS,
-    searchContextSize: config.searchContextSize ?? OPENAI_DEFAULT_SEARCH_CONTEXT_SIZE,
-    requestTimeoutMs: config.requestTimeoutMs,
+    apiKey: config.apiKey.get() ?? launchEnvironmentOf(ctx).get('OPENAI_API_KEY')?.value ?? '',
+    baseURL: config.baseURL.get() ?? OPENAI_DEFAULT_BASE_URL,
+    model: config.model.get() ?? OPENAI_DEFAULT_MODEL,
+    maxTokens: config.maxTokens.get() ?? OPENAI_DEFAULT_MAX_TOKENS,
+    searchContextSize: config.searchContextSize.get() ?? OPENAI_DEFAULT_SEARCH_CONTEXT_SIZE,
+    requestTimeoutMs: config.requestTimeoutMs.get(),
   }
 }
 
 /** 注册 OpenAI 搜索 provider:仅提供独立的 openai_web_search 工具,不接管全局 web_search。 */
 export function apply(ctx: Context, config: Config): void {
-  let current: () => Config = () => config
-  // 官方 0.1.2:设置区经 ctx.settings.installSection 注册。
-  ctx.inject(['settings'], (settingsCtx) => {
-    const settings = settingsCtx.get('settings') as {
-      installSection?: (
-        owner: Context,
-        ns: string,
-        schema: unknown,
-        entry: unknown,
-        hooks: { setSource?: (source: () => Config | undefined) => void; onChange?: () => void },
-      ) => void
-    } | undefined
-    settings?.installSection?.(ctx, WEB_SEARCH_OPENAI_SETTINGS_NAMESPACE, Config, config, {
-      setSource: (source) => {
-        current = (() => source() ?? config) as () => Config
-      },
-      onChange: () => {},
-    })
+  // 设置面板:本插件自带页面(客户端 settings.plugins.tab),关掉按 schema
+  // 自动生成表单的策略(0.2.1 起替代旧 installSection;策略不移除配置读写)。
+  ctx.inject(['settings'], (child) => {
+    child.effect(() => child.settings.configure({ auto: false }, ctx.fiber))
   })
 
-  const provider = new OpenAiSearchProvider(() => resolveOptions(ctx, current()))
+  const provider = new OpenAiSearchProvider(() => resolveOptions(ctx, config))
   try {
     registerOpenAiSearchTool(ctx, provider)
   } catch { /* 已存在同名工具等异常不阻断 */ }
