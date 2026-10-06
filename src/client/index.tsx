@@ -1,21 +1,20 @@
 /**
- * OpenAI 搜索设置卡片(browser half of `@deepseek-ai/dsh-web-search-openai`):
- * a schema-free form over the `web-search-openai` settings namespace, bound to
- * the plugins tab's `settings.plugins.tab` slot (same hierarchy as the
- * AntiGravity / CodeBuddy cards). The API key field is write-only — the Host
- * redacts secrets from every describe response, so the card only ever writes a
- * new value and never renders the stored one.
+ * OpenAI 搜索设置(browser half of `@deepseek-ai/dsh-web-search-openai`):
+ * a schema-free form over the `web-search-openai` settings namespace, registered
+ * into the plugin manager's `plugins.item` slot(主视图「插件管理」页 Official
+ * 组,与官方 subagent/shell 设置页同机制)。The API key field is write-only —
+ * the Host redacts secrets from every describe response, so the card only ever
+ * writes a new value and never renders the stored one.
  * @module @deepseek-ai/dsh-web-search-openai/client
  */
 
-import { Button, IconChevronDownOutlineMedium, Input } from '@deepseek-ai/dsh-client-ui-primitives'
+import { Button, Input } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
 import type { ConfigForm } from '@deepseek-ai/dsh-client-ui-settings/client'
 import type { SnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { InjectFace, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
+import type { InjectFace } from '@deepseek-ai/dsh-client-ui-slots'
 import type { ReactNode } from 'react'
-import { useCallback, useState } from 'react'
 
 /** Namespace the card edits. Spelled here rather than imported: a client package must not depend on a Host package. */
 export const WEB_SEARCH_OPENAI_NS = 'web-search-openai'
@@ -73,9 +72,10 @@ export interface SearchSettingsFace {
   clearKey: () => void
 }
 
-/** Props the renderer binds for the card. */
+/** Props the renderer binds for the page. */
 export type SearchSettingsSectionProps =
-  PropsRuntime<'settings.plugins.tab'>
+  { /** Render mode: one-line list summary or the full settings page. */
+    view?: 'summary' | 'page' }
   & InjectFace<SearchSettingsFace>
 
 /** 卡片 CSS(与 AntiGravity/CodeBuddy 卡片完全同款)。 */
@@ -91,6 +91,7 @@ const CSS: Record<string, string> = {
   chevron: '.dshOpenai_chevron{color:var(--dsw-alias-label-tertiary);flex:none;transition:transform .16s}',
   chevronOpen: '.dshOpenai_chevronOpen{transform:rotate(180deg)}',
   body: '.dshOpenai_body{border-top:1px solid var(--dsw-alias-border-l2);margin:0 16px;padding-bottom:8px}',
+  page: '.dshOpenai_page{display:flex;flex-direction:column}',
   field: '.dshOpenai_field{flex-direction:column;gap:6px;padding:12px 0;display:flex}',
   fieldTop: '.dshOpenai_field+.dshOpenai_field{border-top:1px solid var(--dsw-alias-border-l2)}',
   fieldHead: '.dshOpenai_fieldHead{align-items:center;gap:8px;display:flex}',
@@ -113,14 +114,16 @@ const C = {
   card: 'dshOpenai_card', cardOpen: 'dshOpenai_cardOpen', header: 'dshOpenai_header',
   headText: 'dshOpenai_headText', name: 'dshOpenai_name', description: 'dshOpenai_description',
   chevron: 'dshOpenai_chevron', chevronOpen: 'dshOpenai_chevronOpen', body: 'dshOpenai_body',
+  page: 'dshOpenai_page',
   field: 'dshOpenai_field', fieldHead: 'dshOpenai_fieldHead', label: 'dshOpenai_label',
   hint: 'dshOpenai_hint', input: 'dshOpenai_input', row: 'dshOpenai_row',
 }
 
-/** Render the OpenAI search provider settings card (plugins tab). */
-export function SearchSettingsSection({ useSearchSettings, edit, save, reload, clearKey }: SearchSettingsSectionProps) {
+/** Render the OpenAI search provider settings (plugins.item detail page). */
+export function SearchSettingsSection({ view, useSearchSettings, edit, save, reload, clearKey }: SearchSettingsSectionProps) {
+  // 列表摘要视图:一句话(官方 ItemCard 的 description 渲染此返回值)。
+  if (view === 'summary') return 'OpenAI Responses API 搜索提供方(web_search 工具)'
   const state = useSearchSettings(value => value)
-  const [open, setOpen] = useState(false)
   const disabled = !state.writable || state.saving
   const field = (label: string, control: ReactNode, hint?: string) => (
     <div className={C.field}>
@@ -132,21 +135,10 @@ export function SearchSettingsSection({ useSearchSettings, edit, save, reload, c
     </div>
   )
   return (
-    <li className={`${C.card} ${open ? C.cardOpen : ''}`}>
-      <button type="button" className={C.header} aria-expanded={open}
-        aria-label={`${open ? '收起' : '展开'}: OpenAI 搜索`}
-        onClick={() => setOpen(!open)}>
-        <span className={C.headText}>
-          <span className={C.name}>OpenAI 搜索</span>
-          <span className={C.description}>OpenAI Responses API 搜索提供方(web_search 工具)</span>
-        </span>
-        <IconChevronDownOutlineMedium className={`${C.chevron} ${open ? C.chevronOpen : ''}`} />
-      </button>
-      {open && (
-        <div className={C.body}>
-          {state.failed !== undefined
-            ? <div style={{ padding: '10px 12px', borderRadius: 10, fontSize: 12, background: 'rgba(205,72,72,.1)', color: '#aa3939' }}>{state.failed}</div>
-            : null}
+    <div className={C.page}>
+      {state.failed !== undefined
+        ? <div style={{ padding: '10px 12px', borderRadius: 10, fontSize: 12, background: 'rgba(205,72,72,.1)', color: '#aa3939' }}>{state.failed}</div>
+        : null}
           {state.savedAt !== undefined && state.failed === undefined
             ? <div style={{ padding: '10px 12px', borderRadius: 10, fontSize: 12, background: 'rgba(48,154,100,.1)', color: '#267d52' }}>已保存并生效。</div>
             : null}
@@ -168,9 +160,7 @@ export function SearchSettingsSection({ useSearchSettings, edit, save, reload, c
             <Button variant="outline" disabled={disabled} onClick={reload}>重新加载</Button>
             <Button variant="outline" disabled={disabled} onClick={clearKey}>清除 API Key</Button>
           </div>
-        </div>
-      )}
-    </li>
+    </div>
   )
 }
 
@@ -320,16 +310,17 @@ export const name = 'web-search-openai-client'
 export const inject = ['slots', 'configForms']
 
 /**
- * Mount the OpenAI search card into the plugins tab (`settings.plugins.tab`).
+ * Mount the OpenAI search settings into the plugin manager's `plugins.item`
+ * slot (「插件管理」页 Official 组卡片 + 条目详情页,与官方 subagent/shell 同机制)。
  * @param ctx - the browser plugin context.
  */
 export function apply(ctx: ClientContext): void {
   // 0.2.1:settingsScope 已移除;配置表单经 configForms 按 profile 条目 id 取用。
   const controller = new SearchSettingsController(ctx.configForms.get(WEB_SEARCH_OPENAI_NS))
-  ctx.slots.inject('settings.plugins.tab', () => ctx.slots.register({
-    name: 'settings.plugins.tab',
-    id: WEB_SEARCH_OPENAI_NS,
-    order: 40,
+  ctx.slots.inject('plugins.item', () => ctx.slots.register({
+    name: 'plugins.item',
+    id: 'web-search-openai',
+    order: 45,
     label: () => 'OpenAI 搜索',
     inject: () => controller.inject(),
   }, SearchSettingsSection))
